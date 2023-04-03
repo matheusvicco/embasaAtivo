@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://ecossis.com/www1/wp-content/uploads/2018/11/ICONE-CLIENTE-ecossis-logos-clientes-embasa-1.png"
+      sizes="32x32"
+    />
+    <title>Pagina de consulta</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <style>
+      .header {
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        padding: 40px 0px;
+        background-color: #1e90ff;
+      }
+
+      #text {
+        display: flex;
+        justify-content: center;
+      }
+
+      #text p {
+        color: orange;
+        font-weight: bold;
+      }
+
+      #form {
+        margin: 10px 40px 10px 30px;
+      }
+
+      .btn {
+        margin-top: 30px;
+      }
+
+      .input-group {
+        margin-bottom: 10px;
+      }
+
+      #form label {
+        font-weight: bold;
+      }
+
+      .anexos {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      #cblAnexos {
+        padding: 10px 0px;
+      }
+
+      .msg {
+        height: calc(70vh - 106px - 91px);
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        /* background-color: #1a323f;
+            background-image: linear-gradient(135deg,
+                    #1a323f 0%,
+                    rgba(51, 97, 121, 0.8) 100%); */
+        color: black;
+        align-items: center;
+      }
+
+      #obrigatorio {
+        /* color: red; */
+      }
+
+      .msg__img {
+        width: 100px;
+        height: auto;
+        /* margin-bottom: 1rem; */
+      }
+
+      #paragrafoLoader {
+        text-align: center;
+        font-weight: bold;
+        margin: 50px 10px 0 0;
+      }
+
+      .loader {
+        display: block;
+        border: 16px solid #f3f3f3;
+        /* Light grey */
+        border-top: 16px solid #3498db;
+        /* Blue */
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        animation: spin 2s linear infinite;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media screen and (max-width: 420px) {
+        .loader {
+          margin-left: 25%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <img
+        id="logo"
+        src="https://vekgc6hwv2efrfd6hnebwq.s3.amazonaws.com/2023/02/LUNScGxLNzFuQkNXLXZHOUZDVVdMdzo6.png"
+      />
+    </div>
+    <div id="mostroFormulario" class="formulario">
+      <div id="text">
+        <p>PREENCHA O FORMULÁRIO PARA PROSSEGUIR</p>
+      </div>
+
+      <form id="form">
+        <div class="form-group">
+          <label for="InputCnpj">CNPJ da Empresa que será representada*</label>
+          <input
+            type="cnpj"
+            class="form-control"
+            id="InputCnpj"
+            aria-describedby="CnpjHelp"
+            maxlength="18"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="InputCpf">CPF do Representante legal*</label>
+          <input
+            type="cpf"
+            class="form-control"
+            id="InputCpf"
+            aria-describedby="cpfHelp"
+            maxlength="14"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="InputNome">Nome Completo do Representante Legal*</label>
+          <input
+            type="nome"
+            class="form-control"
+            id="InputNome"
+            aria-describedby="nomeHelp"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="InputTelefone">Celular*</label>
+          <input
+            type="telefone"
+            class="form-control"
+            id="InputTelefone"
+            maxlength="14"
+            aria-describedby="telefoneHelp"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="InputEmail">E-mail do Representante Legal*</label>
+          <input type="email" class="form-control" id="InputEmail" required />
+        </div>
+        <div id="cblAnexos">
+          <h4>Anexos:</h4>
+        </div>
+        <div class="anexos">
+          <label for="fileInput1"
+            >Estatuto ou Contrato Social ou Documento específico de
+            Microempreendedor Individual ou Microempresa;
+            <b>Certifique que seu documento esteja legível.*</b>
+          </label>
+          <input type="file" id="fileInput1" required multiple />
+          <label for="fileInput2"
+            >Documento oficial com foto que contenha os números de RG e CPF do
+            sócio ou administrador (frente e verso);
+            <b>Certifique que seu documento esteja legível.*</b>
+          </label>
+          <input type="file" id="fileInput2" required multiple />
+
+          <label for="fileInput3"
+            >Procuração com firma reconhecida, quando o representante for um
+            Procurador;
+            <b>Certifique que seu documento esteja legível.</b>
+          </label>
+          <input type="file" id="fileInput3" multiple />
+
+          <label for="fileInput4"
+            >Documento oficial com foto que contenha os números de RG e CPF do
+            Procurador (frente e verso);
+            <b>Certifique que seu documento esteja legível.</b>
+          </label>
+          <input type="file" id="fileInput4" multiple />
+        </div>
+
+        <button
+          type="button"
+          onclick="myFunction()"
+          class="btn btn-primary btn-lg btn-block"
+          id="botao"
+        >
+          Registrar Solicitação
+        </button>
+      </form>
+    </div>
+
+    <div id="sucess" class="sucess" style="display: none">
+      <section class="msg">
+        <img
+          alt="Sucesso"
+          class="msg__img"
+          src="https://p1bfdgrrns4j9qsuyuaioa.s3.amazonaws.com/2022/09/NjlJLWhsRDU0SE1jMDloUTd0aUFlZzo6.png"
+        />
+        <p class="msg_sucesso"></p>
+      </section>
+    </div>
+
+    <div id="error" class="error" style="display: none">
+      <section class="msg">
+        <img src="https://img.icons8.com/ios-filled/100/FA5252/cancel.png" />
+        <p class="msg_error"></p>
+      </section>
+    </div>
+    <div class="loader" style="display: none"></div>
+    <div id="paragrafoLoader" style="display: none">
+      <p>Solicitação em processamento, favor aguardar.</p>
+    </div>
+    <a
+      id="voltar"
+      style="
+        display: none;
+        justify-content: center;
+        margin: 1rem;
+        text-decoration: none;
+      "
+      href=""
+    >
+      <button
+        style="
+          background: none;
+          border: 1px solid #1e90ff;
+          font-weight: bold;
+          padding: 0.5rem 1rem;
+        "
+      >
+        Voltar
+      </button>
+    </a>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    const inputcpf = document.getElementById("InputCpf");
+    inputcpf.addEventListener("input", formatarCPF);
+    function formatarCPF(e) {
+      var v = e.target.value.replace(/\D/g, "");
+      v = v.replace(/(\d{3})(\d)/, "$1.$2");
+      v = v.replace(/(\d{3})(\d)/, "$1.$2");
+      v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+      e.target.value = v;
+    }
+    const inputcnpj = document.getElementById("InputCnpj");
+    inputcnpj.addEventListener("input", formatarCNPJ);
+    function formatarCNPJ(e) {
+      var v = e.target.value.replace(/\D/g, "");
+      v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+      v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+      v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+      v = v.replace(/(\d{4})(\d)/, "$1-$2");
+      e.target.value = v;
+    }
+
+    const inputTelefone = document.getElementById("InputTelefone");
+    inputTelefone.addEventListener("input", formatarTelefone);
+    function formatarTelefone(e) {
+      var v = e.target.value.replace(/\D/g, "");
+      v = v.replace(/^(\d\d)(\d)/g, "($1)$2");
+      v = v.replace(/(\d{5})(\d)/, "$1-$2");
+      e.target.value = v;
+    }
+    var arrayFiles = [];
+    var todosDados = [];
+    var nome = document.querySelector("#InputNome");
+    var telefone = document.querySelector("#InputTelefone");
+    var cnpj = document.querySelector("#InputCnpj");
+    var cpf = document.querySelector("#InputCpf");
+    var email = document.querySelector("#InputEmail");
+    var anexo1 = "";
+    var anexo2 = "";
+    var anexo3 = "";
+    var anexo4 = "";
+
+    var arrAnexos = [
+      "#fileInput1",
+      "#fileInput2",
+      "#fileInput3",
+      "#fileInput4",
+    ];
+
+    arrAnexos.forEach((item) => {
+      const itemElement = document.querySelector(`${item}`);
+      itemElement.addEventListener("change", function (event) {
+        if (itemElement.files.length > 4) {
+          alert("Só é permitido o anexo de no máximo 4 arquivos.");
+          itemElement.value = "";
+          return;
+        }
+      });
+    });
+
+    var contagemTamanhoAnexo = 0;
+
+    function myFunction() {
+      const arrayObrigatorios = $(".form-control").toArray();
+      const arrayObrigatoriosAnexos = $("input:file[required]").toArray();
+
+      arrayObrigatorios.filter(
+        (item) => item.value == "" || item.value == null
+      );
+
+      arrayObrigatoriosAnexos.filter(
+        (item) => item.files.length == 0 && item.required == true
+      );
+
+      if (arrayObrigatorios.length > 0) {
+        arrayObrigatorios.forEach((item) => {
+          if (item.value == "" || item.value == null) {
+            item.style.borderColor = "red";
+            chamaSwalError(item.labels[0].innerText);
+          } else {
+            item.style.borderColor = "";
+          }
+        });
+        todosDados.push(arrayObrigatorios);
+      }
+
+      if (arrayObrigatoriosAnexos.length > 0) {
+        arrayObrigatoriosAnexos.forEach((item) => {
+          if (item.files.length == 0 || item.files == null) {
+            item.style.color = "red";
+            chamaSwalError(item.labels[0].innerText);
+          } else {
+            item.style.color = "";
+          }
+        });
+        todosDados.push(arrayObrigatoriosAnexos);
+      }
+
+      function getBase64(file) {
+        if (file.size > 5000000) {
+          return;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+          arrayFiles.push({
+            base64: reader.result,
+            name: file.name.replaceAll(" ", "_"),
+          });
+        };
+        reader.onerror = function (error) {};
+      }
+
+      anexo1 = document.querySelector("#fileInput1");
+      anexo2 = document.querySelector("#fileInput2");
+      anexo3 = document.querySelector("#fileInput3");
+      anexo4 = document.querySelector("#fileInput4");
+      //   debugger
+      contagemTamanhoAnexo = 0
+      if (anexo1.files.length > 0 && anexo1.files.length <= 4) {
+        let verificaTamanho = true;
+        var arrayAnexos = Array.from(anexo1.files);
+
+        // console.log(arrayAnexos);
+        arrayAnexos.forEach((anexo) => {
+            
+          if (anexo.size > 5000000) {
+            verificaTamanho = false;
+          } else {
+            contagemTamanhoAnexo += anexo.size;
+          }
+        });
+
+        if (!verificaTamanho) {
+          anexo1.style.color = "red";
+          chamaSwalError(
+            "Por favor, insira outro arquivo, já que o anexo que você tentou adicionar tem um tamanho superior a 5MB."
+          );
+          anexo1.value = "";
+          return;
+        } else {
+          anexo1.style.color = "";
+        }
+
+        if (anexo1.files[0]) {
+          getBase64(anexo1.files[0]);
+        }
+
+        if (anexo1.files[1]) {
+          getBase64(anexo1.files[1]);
+        }
+
+        if (anexo1.files[2]) {
+          getBase64(anexo1.files[2]);
+        }
+
+        if (anexo1.files[3]) {
+          getBase64(anexo1.files[3]);
+        }
+      }
+      
+      if (anexo2.files.length > 0 && anexo2.files.length <= 4) {
+
+        let verificaTamanho = true;
+        var arrayAnexos = Array.from(anexo2.files);
+
+        // console.log(arrayAnexos);
+        arrayAnexos.forEach((anexo) => {
+          if (anexo.size > 5000000) {
+            verificaTamanho = false;
+          } else {
+            contagemTamanhoAnexo += anexo.size;
+          }
+        });
+
+        if (!verificaTamanho) {
+          anexo2.style.color = "red";
+          chamaSwalError(
+            "Por favor, insira outro arquivo, já que o anexo que você tentou adicionar tem um tamanho superior a 5MB."
+          );
+          anexo2.value = "";
+          return;
+        } else {
+          anexo2.style.color = "";
+        }
+
+        if (anexo2.files[0]) {
+          getBase64(anexo2.files[0]);
+        }
+
+        if (anexo2.files[1]) {
+          getBase64(anexo2.files[1]);
+        }
+
+        if (anexo2.files[2]) {
+          getBase64(anexo2.files[2]);
+        }
+
+        if (anexo2.files[3]) {
+          getBase64(anexo2.files[3]);
+        }
+      }
+
+      if (anexo3.files.length > 0 && anexo3.files.length <= 4) {
+
+        
+        let verificaTamanho = true;
+        var arrayAnexos = Array.from(anexo3.files);
+
+        // console.log(arrayAnexos);
+        arrayAnexos.forEach((anexo) => {
+          if (anexo.size > 5000000) {
+            verificaTamanho = false;
+          } else {
+            contagemTamanhoAnexo += anexo.size;
+          }
+        });
+
+        if (!verificaTamanho) {
+          anexo3.style.color = "red";
+          chamaSwalError(
+            "Por favor, insira outro arquivo, já que o anexo que você tentou adicionar tem um tamanho superior a 5MB."
+          );
+          anexo3.value = "";
+          return;
+        } else {
+          anexo3.style.color = "";
+        }
+
+
+        if (anexo3.files[0]) {
+          getBase64(anexo3.files[0]);
+        }
+
+        if (anexo3.files[1]) {
+          getBase64(anexo3.files[1]);
+        }
+
+        if (anexo3.files[2]) {
+          getBase64(anexo3.files[2]);
+        }
+
+        if (anexo3.files[3]) {
+          getBase64(anexo3.files[3]);
+        }
+      }
+      if (anexo4.files.length > 0 && anexo4.files.length <= 4) {
+
+        let verificaTamanho = true;
+        var arrayAnexos = Array.from(anexo4.files);
+
+        // console.log(arrayAnexos);
+        arrayAnexos.forEach((anexo) => {
+          if (anexo.size > 5000000) {
+            verificaTamanho = false;
+          } else {
+            contagemTamanhoAnexo += anexo.size;
+          }
+        });
+
+        if (!verificaTamanho) {
+          anexo4.style.color = "red";
+          chamaSwalError(
+            "Por favor, insira outro arquivo, já que o anexo que você tentou adicionar tem um tamanho superior a 5MB."
+          );
+          anexo4.value = "";
+          return;
+        } else {
+          anexo4.style.color = "";
+        }
+
+
+        if (anexo4.files[0]) {
+          getBase64(anexo4.files[0]);
+        }
+
+        if (anexo4.files[1]) {
+          getBase64(anexo4.files[1]);
+        }
+
+        if (anexo4.files[2]) {
+          getBase64(anexo4.files[2]);
+        }
+
+        if (anexo4.files[3]) {
+          getBase64(anexo4.files[3]);
+        }
+      }
+
+      var arrayGeralObrigatorio = todosDados[0].concat(todosDados[1]);
+      if (arrayGeralObrigatorio.length > 0) {
+        verificaSubmit();
+      }
+
+      function verificaSubmit() {
+        var filterData = arrayGeralObrigatorio.filter(
+          (item) => item.value == ""
+        );
+        if (filterData.length > 0) {
+          return;
+        } else {
+          validaCampos();
+        //   console.log(contagemTamanhoAnexo)
+        }
+      }
+    }
+
+    function validaCnpj(campo) {
+      var cnpj = campo.value.replace(/\D/g, "");
+      const valoresRepetidos = [
+        "00000000000000",
+        "11111111111111",
+        "22222222222222",
+        "33333333333333",
+        "44444444444444",
+        "55555555555555",
+        "66666666666666",
+        "77777777777777",
+        "88888888888888",
+        "99999999999999",
+      ];
+      if (cnpj.toString().length != 14 || valoresRepetidos.includes(cnpj)) {
+        chamaSwalError(`Informe um CNPJ válido!`);
+        campo.value = "";
+      } else {
+        tamanho = cnpj.length - 2;
+        numeros = cnpj.substring(0, tamanho);
+        digitos = cnpj.substring(tamanho);
+        soma = 0;
+        pos = tamanho - 7;
+        for (i = tamanho; i >= 1; i--) {
+          soma += numeros.charAt(tamanho - i) * pos--;
+          if (pos < 2) pos = 9;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        if (resultado != digitos.charAt(0)) {
+          chamaSwalError(`Informe um CNPJ válido!`);
+          document.querySelector("#InputCnpj").style.borderColor = "red";
+          campo.value = "";
+        } else {
+          document.querySelector("#InputCnpj").style.borderColor = "";
+        }
+        tamanho = tamanho + 1;
+        numeros = cnpj.substring(0, tamanho);
+        soma = 0;
+        pos = tamanho - 7;
+        for (i = tamanho; i >= 1; i--) {
+          soma += numeros.charAt(tamanho - i) * pos--;
+          if (pos < 2) pos = 9;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        if (resultado != digitos.charAt(1)) {
+          chamaSwalError(`Informe um CNPJ válido!`);
+          document.querySelector("#InputCnpj").style.borderColor = "red";
+          campo.value = "";
+        } else {
+          document.querySelector("#InputCnpj").style.borderColor = "";
+        }
+      }
+    }
+
+    document.getElementById("InputCnpj").addEventListener("blur", function () {
+      validaCnpj(this);
+    });
+
+    document.getElementById("InputCnpj").maxLength = "18";
+    document.getElementById("InputCnpj").addEventListener("input", function () {
+      this.value = this.value;
+    });
+
+    function validaCpf(campo) {
+      var cpf = campo.value.replace(/\D/g, "");
+      const valoresRepetidos = [
+        "00000000000",
+        "11111111111",
+        "22222222222",
+        "33333333333",
+        "44444444444",
+        "55555555555",
+        "66666666666",
+        "77777777777",
+        "88888888888",
+        "99999999999",
+      ];
+      if (cpf.toString().length != 11 || valoresRepetidos.includes(cpf)) {
+        chamaSwalError(`Informe um CPF válido!`);
+        campo.value = "";
+      } else {
+        var result = true;
+        [9, 10].forEach(function (j) {
+          var soma = 0,
+            r;
+          cpf
+            .split(/(?=)/)
+            .splice(0, j)
+            .forEach(function (e, i) {
+              soma += parseInt(e) * (j + 2 - (i + 1));
+            });
+          r = soma % 11;
+          r = r < 2 ? 0 : 11 - r;
+          if (r != cpf.substring(j, j + 1)) result = false;
+        });
+        if (result == false) {
+          chamaSwalError(`Informe um CPF válido!`);
+          document.querySelector("#InputCpf").style.borderColor = "red";
+          campo.value = "";
+        } else {
+          document.querySelector("#InputCpf").style.borderColor = "";
+        }
+      }
+    }
+
+    document.getElementById("InputCpf").addEventListener("blur", function () {
+      validaCpf(this);
+    });
+
+    document.getElementById("InputCpf").maxLength = "14";
+    document.getElementById("InputCpf").addEventListener("input", function () {
+      this.value = this.value;
+    });
+    
+    function validaCampos() {
+      if (
+        nome.value != "" &&
+        telefone.value != "" &&
+        cnpj.value != "" &&
+        cpf.value != "" &&
+        email.value != "" &&
+        anexo1.value != "" &&
+        anexo2.value != ""
+      ) {
+        if (contagemTamanhoAnexo < 20000000) {
+          document.querySelector(".loader").style = "display:block";
+          document.querySelector("#paragrafoLoader").style = "display:block";
+          document.querySelector(".formulario").style = "display:none";
+
+          setTimeout(() => {
+            EnviaSubmit();
+          }, 3000);
+        }else{
+            chamaSwalError(
+            "Por favor, verifique se os arquivos que deseja anexar não ultrapassam o limite de tamanho de 20MB no total. Caso a soma dos anexos seja maior, por favor insira arquivos menores."
+          );
+
+        }
+      }
+    }
+
+    function EnviaSubmit() {
+      var data = {
+        nome: nome.value,
+        telefone: telefone.value,
+        cnpj: cnpj.value,
+        cpf: cpf.value,
+        email: email.value,
+        anexos: arrayFiles,
+      };
+    //   console.log(data)
+      // chamaSwalSucess();
+      // document.querySelector(".loader").style = "display:block";
+      // document.querySelector(".formulario").style = "display:none";
+      fetch("https://service-embasa.metasix.solutions/ativoEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // "Autorization": "bWV0YXNpeDpNZXRAUyF4"
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (
+            data.statusCode == 404 ||
+            data.statusCode == 500 ||
+            data.statusCode == 409
+          ) {
+            document.querySelector(".formulario").style = "display:none";
+            document.querySelector(".loader").style = "display:none";
+            document.querySelector("#paragrafoLoader").style = "display:none";
+            document.querySelector(".error").style = "display:block";
+            document.querySelector(".msg_error").innerText = data.message;
+            document.querySelector("#voltar").style.display = "flex";
+          }
+          if (data.statusCode == 200 || data.statusCode == 204) {
+            document.querySelector(".formulario").style = "display:none";
+            document.querySelector(".loader").style = "display:none";
+            document.querySelector("#paragrafoLoader").style = "display:none";
+            document.querySelector(".sucess").style = "display:block";
+            // document.querySelector(".msg_sucesso").innerText = data.message;
+            document.querySelector(".msg_sucesso").innerHTML = data.message;
+            document.querySelector("#voltar").style.display = "flex";
+          }
+        })
+        .catch((error) => {});
+    }
+
+    document.querySelector("#voltar").addEventListener("click", function () {
+      document.querySelector(".formulario").style = "display:flex";
+      document.querySelector("#voltar").style = "display:none";
+    });
+
+    function chamaSwalSucess() {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Sucesso! Enviamos os dados Preenchidos",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    function chamaSwalError(texto) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `Preencha os campos obrigatórios. ${texto}! `,
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
+    function timeOutSwall() {
+      let timerInterval;
+      Swal.fire({
+        title: "Aguarde um instante",
+        html: "I will close in <b></b> milliseconds.",
+        timer: 2700,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector("b");
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft();
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
+      });
+    }
+  </script>
+</html>
