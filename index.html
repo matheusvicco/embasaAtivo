@@ -676,15 +676,12 @@
             email: email.value,
             anexos: arrayFiles,
         };
-        //   console.log(data)
-        // chamaSwalSucess();
-        // document.querySelector(".loader").style = "display:block";
-        // document.querySelector(".formulario").style = "display:none";
+
         fetch("https://service-embasa.metasix.solutions/ativoEmail", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // "Autorization": "bWV0YXNpeDpNZXRAUyF4"
+
                 },
                 body: JSON.stringify(data),
             })
@@ -707,7 +704,7 @@
                     document.querySelector(".loader").style = "display:none";
                     document.querySelector("#paragrafoLoader").style = "display:none";
                     document.querySelector(".sucess").style = "display:block";
-                    // document.querySelector(".msg_sucesso").innerText = data.message;
+
                     document.querySelector(".msg_sucesso").innerHTML = data.message;
                     document.querySelector("#voltar").style.display = "flex";
                 }
