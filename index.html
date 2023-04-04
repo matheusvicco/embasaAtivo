@@ -328,14 +328,14 @@
         anexo2 = document.querySelector("#fileInput2");
         anexo3 = document.querySelector("#fileInput3");
         anexo4 = document.querySelector("#fileInput4");
-        //   debugger
+
         contagemTamanhoAnexo = 0
             // if (anexo1.files.length > 0 && anexo1.files.length <= 4) {
         if (anexo1.files.length > 0) {
             let verificaTamanho = true;
             var arrayAnexos = Array.from(anexo1.files);
 
-            // console.log(arrayAnexos);
+
             arrayAnexos.forEach((anexo) => {
 
                 if (anexo.size > 5000000) {
@@ -379,7 +379,7 @@
             let verificaTamanho = true;
             var arrayAnexos = Array.from(anexo2.files);
 
-            // console.log(arrayAnexos);
+
             arrayAnexos.forEach((anexo) => {
                 if (anexo.size > 5000000) {
                     verificaTamanho = false;
@@ -423,7 +423,7 @@
             let verificaTamanho = true;
             var arrayAnexos = Array.from(anexo3.files);
 
-            // console.log(arrayAnexos);
+
             arrayAnexos.forEach((anexo) => {
                 if (anexo.size > 5000000) {
                     verificaTamanho = false;
@@ -466,7 +466,7 @@
             let verificaTamanho = true;
             var arrayAnexos = Array.from(anexo4.files);
 
-            // console.log(arrayAnexos);
+
             arrayAnexos.forEach((anexo) => {
                 if (anexo.size > 5000000) {
                     verificaTamanho = false;
@@ -517,7 +517,6 @@
                 return;
             } else {
                 validaCampos();
-                //   console.log(contagemTamanhoAnexo)
             }
         }
     }
@@ -673,7 +672,7 @@
             anexos: arrayFiles,
         };
 
-        fetch("https://service-embasa.metasix.solutions/ativoEmail", {
+        fetch('url para enviar os dados do formulario e dos anexos ja com base64 para validadores ou envio para o banco', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
