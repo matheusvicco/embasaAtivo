@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <style>
         .header {
-            /* text-align: center; */
             display: flex;
             justify-content: center;
             padding: 40px 0px;
@@ -67,14 +66,9 @@
             align-items: center;
         }
         
-        #obrigatorio {
-            /* color: red; */
-        }
-        
         .msg__img {
             width: 100px;
             height: auto;
-            /* margin-bottom: 1rem; */
         }
         
         #paragrafoLoader {
@@ -86,9 +80,7 @@
         .loader {
             display: block;
             border: 16px solid #f3f3f3;
-            /* Light grey */
             border-top: 16px solid #3498db;
-            /* Blue */
             border-radius: 50%;
             width: 200px;
             height: 200px;
@@ -268,16 +260,16 @@
         "#fileInput4",
     ];
 
-    arrAnexos.forEach((item) => {
-        const itemElement = document.querySelector(`${item}`);
-        itemElement.addEventListener("change", function(event) {
-            if (itemElement.files.length > 4) {
-                alert("Só é permitido o anexo de no máximo 4 arquivos.");
-                itemElement.value = "";
-                return;
-            }
-        });
-    });
+    // arrAnexos.forEach((item) => {
+    //     const itemElement = document.querySelector(`${item}`);
+    //     itemElement.addEventListener("change", function(event) {
+    //         if (itemElement.files.length > 4) {
+    //             alert("Só é permitido o anexo de no máximo 4 arquivos.");
+    //             itemElement.value = "";
+    //             return;
+    //         }
+    //     });
+    // });
 
     var contagemTamanhoAnexo = 0;
 
@@ -338,7 +330,8 @@
         anexo4 = document.querySelector("#fileInput4");
         //   debugger
         contagemTamanhoAnexo = 0
-        if (anexo1.files.length > 0 && anexo1.files.length <= 4) {
+            // if (anexo1.files.length > 0 && anexo1.files.length <= 4) {
+        if (anexo1.files.length > 0) {
             let verificaTamanho = true;
             var arrayAnexos = Array.from(anexo1.files);
 
@@ -380,7 +373,8 @@
             }
         }
 
-        if (anexo2.files.length > 0 && anexo2.files.length <= 4) {
+        // if (anexo2.files.length > 0 && anexo2.files.length <= 4) {
+        if (anexo2.files.length > 0) {
 
             let verificaTamanho = true;
             var arrayAnexos = Array.from(anexo2.files);
@@ -422,7 +416,8 @@
             }
         }
 
-        if (anexo3.files.length > 0 && anexo3.files.length <= 4) {
+        // if (anexo3.files.length > 0 && anexo3.files.length <= 4) {
+        if (anexo3.files.length > 0) {
 
 
             let verificaTamanho = true;
@@ -439,7 +434,7 @@
 
             if (!verificaTamanho) {
                 anexo3.style.color = "red";
-                chamaSwalError(
+                chamaSwalErrorNoRequired(
                     "Por favor, insira outro arquivo, já que o anexo que você tentou adicionar tem um tamanho superior a 5MB."
                 );
                 anexo3.value = "";
@@ -465,7 +460,8 @@
                 getBase64(anexo3.files[3]);
             }
         }
-        if (anexo4.files.length > 0 && anexo4.files.length <= 4) {
+        // if (anexo4.files.length > 0 && anexo4.files.length <= 4) {
+        if (anexo4.files.length > 0) {
 
             let verificaTamanho = true;
             var arrayAnexos = Array.from(anexo4.files);
@@ -481,7 +477,7 @@
 
             if (!verificaTamanho) {
                 anexo4.style.color = "red";
-                chamaSwalError(
+                chamaSwalErrorNoRequired(
                     "Por favor, insira outro arquivo, já que o anexo que você tentou adicionar tem um tamanho superior a 5MB."
                 );
                 anexo4.value = "";
@@ -733,7 +729,17 @@
             icon: "error",
             title: `Preencha os campos obrigatórios. ${texto}! `,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 4000,
+        });
+    }
+
+    function chamaSwalErrorNoRequired(texto) {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: ` ${texto}! `,
+            showConfirmButton: false,
+            timer: 4000,
         });
     }
 
